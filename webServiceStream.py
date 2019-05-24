@@ -47,6 +47,15 @@ def stream():
             yield createRandomData(instrList) + "\n"
     return Response(eventStream(), mimetype="text/event-stream")
 
+@app.route('/streamTest/sse')
+def sse_stream():
+    instrList = createInstrumentList()
+    def eventStream():
+        while True:
+            #nonlocal instrList
+            yield 'data:{}\n\n'.format(createRandomData(instrList))
+    return Response(eventStream(), mimetype="text/event-stream")
+
 
 def get_message():
     """this could be any function that blocks until data is ready"""
