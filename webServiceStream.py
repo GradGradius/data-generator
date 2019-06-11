@@ -38,7 +38,7 @@ def index():
     return "Data Generator is running..."
 
 @app.route('/testservice')
-def index():
+def testservice():
     deal = createRandomData( createInstrumentList() )
     return Response( deal, status=200, mimetype='application/json')
 
