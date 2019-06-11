@@ -34,9 +34,13 @@ def createInstrumentList():
     return instrumentList
 
 @app.route('/')
-@app.route('/testservice')
 def index():
     return "Data Generator is running..."
+
+@app.route('/testservice')
+def index():
+    deal = createRandomData( createInstrumentList() )
+    return Response( deal, status=200, mimetype='application/json')
 
 @app.route('/streamTest')
 def stream():
