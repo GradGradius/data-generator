@@ -87,5 +87,5 @@ def createRandomData( instrumentList ):
     return json.dumps(deal)
 
 if __name__ == '__main__':
-     app.run(port=80, threaded=True, host=('0.0.0.0'))
+     app.run(port=8080, threaded=True, host=('0.0.0.0'))
 
