@@ -27,13 +27,16 @@ def stream():
     return Response(eventStream(), status=200, mimetype="text/event-stream")
 
 def sse_stream():
+    theHeaders = {"X-Accel-Buffering": "False"}
     rdd = RandomDealData()
     instrList = rdd.createInstrumentList()
     def eventStream():
         while True:
             #nonlocal instrList
             yield 'data:{}\n\n'.format(rdd.createRandomData(instrList))
-    return Response(eventStream(), status=200, mimetype="text/event-stream")
+    resp = Response(eventStream(), status=200, mimetype="text/event-stream")
+    resp.headers["X-Accel-Buffering"] = "False"
+    return resp
 
 
 def get_time():
